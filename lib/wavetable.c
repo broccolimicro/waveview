@@ -242,6 +242,50 @@ wavetable_foreach_wavevar(WaveTable *wt, GFunc func, gpointer *p)
    }
 }
 
+typedef struct {
+	char *name;
+	int index;
+} keyval;
+
+int keyval_compare(const void *k1, const void *k2) {
+	return strcmp(((keyval*)k1)->name, ((keyval*)k2)->name);
+}
+
+/*
+ * Iterate over all WaveVars in all sweeps/segments in the WaveFile,
+ * calling the function for each one.
+ */
+void
+wavetable_foreach_wavevar_sorted(WaveTable *wt, GFunc func, gpointer *p)
+{
+   keyval k;
+   WaveVar *var;
+   WDataSet *wds;
+   int i, j;
+   
+   for ( i = 0; i < wt->ntables; i++) {
+      wds = g_ptr_array_index(wt->tables, i);
+			
+      if (wds->nrows > 0 ){
+				keyval names[wds->numVars-1];
+				for (j = 1; j < wds->numVars; j++) {
+          var = (WaveVar *) dataset_get_wavevar(wds, j);
+					k.index = j;
+					k.name = wavevar_get_name(var);
+					names[j-1] = k;
+				}
+				qsort(names, wds->numVars-1, sizeof(keyval), &keyval_compare);
+
+        for (j = 0 ; j < wds->numVars-1; j++) {
+					msg_dbg("%d %s %d\n", j, names[j].name, names[j].index);
+          var = (WaveVar *) dataset_get_wavevar(wds, names[j].index);
+          (func)(var, p);
+        }
+      }
+   }
+}
+
+
 /*
  * find a cooresponding name in new dataset after file reload
  * with corresponding table num

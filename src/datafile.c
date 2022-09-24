@@ -233,7 +233,7 @@ void datafile_list_win_empty(DataFile *wdata)
 void datafile_list_win_fill(DataFile *wdata)
 {
    if (wdata->wlist_win) {
-      wavetable_foreach_wavevar(wdata->wt, datafile_add_list_button,
+      wavetable_foreach_wavevar_sorted(wdata->wt, datafile_add_list_button,
 				(gpointer) wdata);
    }
 }
