@@ -48,29 +48,29 @@ typedef struct _UserData UserData;
 typedef struct _AwSubmenuList AwSubmenuList;
 
 struct _AwSubmenuList {
-   char *desc;
-   char *icon_str;
+	char *desc;
+	char *icon_str;
 };
 
 
 typedef struct _GawIoData GawIoData; /* stefan, moved here from gawio.c */
 struct _GawIoData {
-   int fd;
-   UserData *ud;
-   GIOChannel *iochannel;
-   GIOChannel *listenchannel;
-   SockCon *listen;
-   SockCon *cnx;
-   guint listenid; /* id of the watch */
-   guint sourceid; /* id of the watch */
+	int fd;
+	UserData *ud;
+	GIOChannel *iochannel;
+	GIOChannel *listenchannel;
+	SockCon *listen;
+	SockCon *cnx;
+	guint listenid; /* id of the watch */
+	guint sourceid; /* id of the watch */
 
-   char *curtbl;
-   int state;
-   int curcol;
-   int currow;
-   DataFile *wdata;
-   WDataSet *wds;
-   char *msg;
+	char *curtbl;
+	int state;
+	int curcol;
+	int currow;
+	DataFile *wdata;
+	WDataSet *wds;
+	char *msg;
 };
 
 
@@ -83,10 +83,10 @@ typedef struct _AwSubmenuAction AwSubmenuAction;
 typedef void (*SubmenuAction_FP)( AwSubmenuAction *sa );
 
 struct _AwSubmenuAction {
-   UserData *ud;
-   AwSubmenuList *tbl;      /* table of submenu items */
-   int *up_index;           /* address of the variable holding the index */
-   SubmenuAction_FP func;   /* function to realize the choice */
+	UserData *ud;
+	AwSubmenuList *tbl;      /* table of submenu items */
+	int *up_index;           /* address of the variable holding the index */
+	SubmenuAction_FP func;   /* function to realize the choice */
 };
 
 
@@ -96,100 +96,100 @@ struct _AwSubmenuAction {
  */
 
 struct _UserData {
-   gchar *prog;
-   UserPrefs *up;         /* pointer to preference structure */
-   gchar *mainName;
-   int restart;
-   GSimpleActionGroup *group;  /* the main action group */
-   GtkWidget *window;       /* top level window */
-   GtkWidget *globalTable;  /* global table to contains the other widgets */
-   GtkWidget *dialog_window;
-   GtkWidget *meas_hbox;   /* hbox containing x measure buttons */
-   int meas_hbox_shown;  /* 1 hbox containing x measure buttons is displayed */
-   GtkWidget *menuBar;   /* menu bar */
-   GMenuModel *algomodel;      /* menu model for algo selection */
-   AwSubmenuAction *algodata;  /* data for algo action */
-   GMenuModel *xconvmodel;   /* menu model for x conversion method */
-   AwSubmenuAction *xconvdata;  /* data for xconv action */
-   GMenuModel *vlmmodel;     /* menu model for variable list  */
-   GtkWidget *toolBar; /* tool bar */
-   GtkWidget *panel_scrolled; /*  scrolled window for panel table */
-   int sbSize;                /* allocated size for the scrollbar */
-   GtkWidget *allline_box; /*   hbox for logXbox, xlabels */
-   GtkActionGroup *actions;   /* action group for mainmenu     */
-   GtkActionGroup *vlactions; /* action group for variable list */
-   GtkWidget *statusbar;   /* bottom status bar */
-   GtkWidget *statusLabel; /* label in bottom status bar */
-   GList *xlabel_list;        /* xlabel list */
-   GList *destdata_list;      /* DnDDestData * list */
-   GtkWidget *xlabel_table;   /* gtktable for xlabels */
-   GtkWidget *xlabel_ev_box;
-   GtkWidget *xlabel_box;
-   GtkWidget *logx_box;
-   GtkWidget *xscrollbar;
-   GtkAdjustment *xadj;
-   GtkWidget *win_xlabel_log;
+	gchar *prog;
+	UserPrefs *up;         /* pointer to preference structure */
+	gchar *mainName;
+	int restart;
+	GSimpleActionGroup *group;  /* the main action group */
+	GtkWidget *window;       /* top level window */
+	GtkWidget *globalTable;  /* global table to contains the other widgets */
+	GtkWidget *dialog_window;
+	GtkWidget *meas_hbox;   /* hbox containing x measure buttons */
+	int meas_hbox_shown;  /* 1 hbox containing x measure buttons is displayed */
+	GtkWidget *menuBar;   /* menu bar */
+	GMenuModel *algomodel;      /* menu model for algo selection */
+	AwSubmenuAction *algodata;  /* data for algo action */
+	GMenuModel *xconvmodel;   /* menu model for x conversion method */
+	AwSubmenuAction *xconvdata;  /* data for xconv action */
+	GMenuModel *vlmmodel;     /* menu model for variable list  */
+	GtkWidget *toolBar; /* tool bar */
+	GtkWidget *panel_scrolled; /*  scrolled window for panel table */
+	int sbSize;                /* allocated size for the scrollbar */
+	GtkWidget *allline_box; /*   hbox for logXbox, xlabels */
+	GtkActionGroup *actions;   /* action group for mainmenu     */
+	GtkActionGroup *vlactions; /* action group for variable list */
+	GtkWidget *statusbar;   /* bottom status bar */
+	GtkWidget *statusLabel; /* label in bottom status bar */
+	GList *xlabel_list;        /* xlabel list */
+	GList *destdata_list;      /* DnDDestData * list */
+	GtkWidget *xlabel_table;   /* gtktable for xlabels */
+	GtkWidget *xlabel_ev_box;
+	GtkWidget *xlabel_box;
+	GtkWidget *logx_box;
+	GtkWidget *xscrollbar;
+	GtkAdjustment *xadj;
+	GtkWidget *win_xlabel_log;
 
-   GdkRGBA  *bg_color;     /* color for background */
-   GdkRGBA  *pg_color;     /* color for panel grid graticule */
-   GdkRGBA  *hl_color;     /* color for panel grid graticule */
-   GdkRGBA  *wbut_color;   /* color for wave button bg */
-   GdkRGBA  *lbbut_fgcolor;  /* color for list box button fg */
-   GdkRGBA  *lbbut_bgcolor;  /* color for list box button bg */
+	GdkRGBA  *bg_color;     /* color for background */
+	GdkRGBA  *pg_color;     /* color for panel grid graticule */
+	GdkRGBA  *hl_color;     /* color for panel grid graticule */
+	GdkRGBA  *wbut_color;   /* color for wave button bg */
+	GdkRGBA  *lbbut_fgcolor;  /* color for list box button fg */
+	GdkRGBA  *lbbut_bgcolor;  /* color for list box button bg */
 
-   GSList *listFiles;     /* list of filename to load */
-   gchar *filename;
-   gchar *format;        /* format of the data file */
-   int bits;             /* sample size for writing .wav files */
-   int rate;             /* sample rate for writing .wav files */
-   gchar *printFmt;      /* printf format used to export write file */
-   gint  reqpanels;
-   
-   AWCursor **cursors;  /* 3 cursor storage pointer */
-   
-   GtkWidget *panelTable;     /* gtk table for panels */
-   GList *panelList;          /* list of panels  */
-   WavePanel *selected_panel; /* selected panel */
-   WDataSet *curwds;       /* the last dataset used; for x processing */
+	GSList *listFiles;     /* list of filename to load */
+	gchar *filename;
+	gchar *format;        /* format of the data file */
+	int bits;             /* sample size for writing .wav files */
+	int rate;             /* sample rate for writing .wav files */
+	gchar *printFmt;      /* printf format used to export write file */
+	gint  reqpanels;
 
-   GawLabels *xLabels;     /* structure to hold data about the axis */
-   int char_width;         /* char width  in pixel for the default font */
-   int char_height;        /* char height in pixel for the default font */
-   
-   MouseState mouseState;
-   gint drag_button;      /* which button was dragged   */
-   int button_down;
-   SelRange *srange;       /* structure to store selected range */
-   
-   int suppress_redraw;
-   int NWColors ;        /* # of wavecolorN styles expected in the .gtkrc */
-   
-   GList *all_measure_buttons; /* measure buttons list */
-   GList *wdata_list;     /* dataset list */
-   
-   GSList *imgFormats;   /* list of writtable img formats */
-   const gchar *imgFmt;  /* selected img format */
-   
-   GawSndData *sndData;   /* sound data structure */
-   
-   int listenPort;
-   void *gawio;           /* pointer to gawio struct */
-   int gripdelta;         /* delta on displacement of the grip */
-   int winWidth;          /* main current window actual width */
-   int winHeight;         /* main current window height */
-   int reqWinWidth;       /* requested main current window actual width */
-   int reqWinHeight;      /* requested main current window height */
-   int maxHeight;         /* maximum height for panel_scrolled */
-   int waHeight;          /* work area height */
-   int panelWidth;        /* current panel width */
-   int panelHeight;       /* current panel height */
-   int panelScrolledHeight;  /* current height of panel scrolled widget */
-   GawText *gtexttmp;       /* temp pointer to a Gawtext */
-   const gchar *panelfont;  /* panel fontname */
-   /* sensitive widget */
-   GtkWidget *LogX;   
-   GtkWidget *LogYPanel;   
-   GtkWidget *moreYlabels;   
+	AWCursor **cursors;  /* 3 cursor storage pointer */
+
+	GtkWidget *panelTable;     /* gtk table for panels */
+	GList *panelList;          /* list of panels  */
+	WavePanel *selected_panel; /* selected panel */
+	WDataSet *curwds;       /* the last dataset used; for x processing */
+
+	GawLabels *xLabels;     /* structure to hold data about the axis */
+	int char_width;         /* char width  in pixel for the default font */
+	int char_height;        /* char height in pixel for the default font */
+
+	MouseState mouseState;
+	gint drag_button;      /* which button was dragged   */
+	int button_down;
+	SelRange *srange;       /* structure to store selected range */
+
+	int suppress_redraw;
+	int NWColors ;        /* # of wavecolorN styles expected in the .gtkrc */
+
+	GList *all_measure_buttons; /* measure buttons list */
+	GList *wdata_list;     /* dataset list */
+
+	GSList *imgFormats;   /* list of writtable img formats */
+	const gchar *imgFmt;  /* selected img format */
+
+	GawSndData *sndData;   /* sound data structure */
+
+	int listenPort;
+	void *gawio;           /* pointer to gawio struct */
+	int gripdelta;         /* delta on displacement of the grip */
+	int winWidth;          /* main current window actual width */
+	int winHeight;         /* main current window height */
+	int reqWinWidth;       /* requested main current window actual width */
+	int reqWinHeight;      /* requested main current window height */
+	int maxHeight;         /* maximum height for panel_scrolled */
+	int waHeight;          /* work area height */
+	int panelWidth;        /* current panel width */
+	int panelHeight;       /* current panel height */
+	int panelScrolledHeight;  /* current height of panel scrolled widget */
+	GawText *gtexttmp;       /* temp pointer to a Gawtext */
+	const gchar *panelfont;  /* panel fontname */
+	/* sensitive widget */
+	GtkWidget *LogX;   
+	GtkWidget *LogYPanel;   
+	GtkWidget *moreYlabels;   
 };
 
 /*
@@ -235,7 +235,7 @@ void az_zoom_x_full_gaction (GSimpleAction *action, GVariant *param, gpointer us
 void az_pop_zoom_x_full_gaction (GSimpleAction *action, GVariant *param, gpointer user_data );
 void az_zoom_y_full_gaction (GSimpleAction *action, GVariant *param, gpointer user_data );
 void az_pop_zoom_y_full_gaction (GSimpleAction *action, GVariant *param, gpointer user_data);
-   
+
 void az_pop_zoom_y_full_gaction (GSimpleAction *action, GVariant *param, gpointer user_data );
 void az_zoom_x_gaction (GSimpleAction *action, GVariant *param,  gpointer user_data);
 void az_pop_zoom_x_gaction (GSimpleAction *action, GVariant *param, gpointer user_data );

@@ -15,18 +15,18 @@ typedef struct _GawSegment GawSegment;
  * state of mouse for drag operations
  */
 enum _MouseState {
-   M_NONE,
-      M_CURSOR_DRAG,
-      M_SELRANGE_ARMED,
-      M_SELRANGE_ACTIVE,
-      M_DRAW_TEXT,
-      M_TEXT_DRAG,
+	M_NONE,
+	M_CURSOR_DRAG,
+	M_SELRANGE_ARMED,
+	M_SELRANGE_ACTIVE,
+	M_DRAW_TEXT,
+	M_TEXT_DRAG,
 };
 
 enum _SelRangeType {
-   SR_X = 1,
-      SR_Y,
-      SR_XY
+	SR_X = 1,
+	SR_Y,
+	SR_XY
 };
 
 /*
@@ -35,26 +35,26 @@ enum _SelRangeType {
  */
 
 struct _SelRange {
-   int drawn;
-   SelRangeType type;
-   WavePanel *wp;
-   GdkRGBA *color;
-   int y1;
-   int y2;
-   int x1;
-   int x2;
-   int x1_root;
-   int y1_root;
+	int drawn;
+	SelRangeType type;
+	WavePanel *wp;
+	GdkRGBA *color;
+	int y1;
+	int y2;
+	int x1;
+	int x2;
+	int x1_root;
+	int y1_root;
 };
 
 /*
  * a temporary replacement for GdkSegment
  */
 struct _GawSegment {
-  gint x1;
-  gint y1;
-  gint x2;
-  gint y2;
+	gint x1;
+	gint y1;
+	gint x2;
+	gint y2;
 };
 
 /*

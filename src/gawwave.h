@@ -13,17 +13,17 @@ typedef struct _VisibleWave VisibleWave;
 
 
 struct _VisibleWave {
-   AppClass parent;
-   WaveVar *var;
-   DataFile *wdata;
-   WavePanel *wp;
-   int colorn;
-   int logAble;           /* the weve can be viewved in logarithm form */
-   GdkRGBA *color;        /* color for the wave */
-   GtkWidget *button;
-   GtkWidget *label;
-   MeasureBtn *mbtn[3];
-   GtkWidget *buttonpopup;   /* button popup menu */
+	AppClass parent;
+	WaveVar *var;
+	DataFile *wdata;
+	WavePanel *wp;
+	int colorn;
+	int logAble;           /* the weve can be viewved in logarithm form */
+	GdkRGBA *color;        /* color for the wave */
+	GtkWidget *button;
+	GtkWidget *label;
+	MeasureBtn *mbtn[3];
+	GtkWidget *buttonpopup;   /* button popup menu */
 };
 
 /*

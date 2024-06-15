@@ -23,19 +23,19 @@
 #define XDIR(lb) (lb->xdir ? "X" : "Y")
 
 enum _changedValueInfo {
-   CV_INIT = ( 1 << 0),         /* 1 after  initialization */
-      CV_STANDBY    = ( 1 << 1),       /* nothing to do                 */
-      CV_CHANGED    = ( 1 << 2),       /* values have changed           */
-      CV_SBCHANGED  = ( 1 << 3),       /* scrollbar state has changed   */
-      CV_SBSHOW     = ( 1 << 4),       /* 1 if scrollbar is shown       */
+	CV_INIT = ( 1 << 0),         /* 1 after  initialization */
+	CV_STANDBY    = ( 1 << 1),       /* nothing to do                 */
+	CV_CHANGED    = ( 1 << 2),       /* values have changed           */
+	CV_SBCHANGED  = ( 1 << 3),       /* scrollbar state has changed   */
+	CV_SBSHOW     = ( 1 << 4),       /* 1 if scrollbar is shown       */
 };
-      
+
 typedef struct _GawLabels GawLabels;
 typedef struct _LabelData LabelData;
 
 struct _LabelData {
-   GtkWidget *label;  /* the pointer to the label widget */
-   double lbval;      /* value for the label */
+	GtkWidget *label;  /* the pointer to the label widget */
+	double lbval;      /* value for the label */
 };
 
 /*
@@ -43,38 +43,38 @@ struct _LabelData {
  */
 
 struct _GawLabels {
-   AppClass parent;
-   UserPrefs *up;      /* pointer to userPrefs */
-   double min_val;     /* min/max data x/y values over whole vwlist */
-   double max_val;
-   double min_Lval;        /* their log values */
-   double max_Lval;
+	AppClass parent;
+	UserPrefs *up;      /* pointer to userPrefs */
+	double min_val;     /* min/max data x/y values over whole vwlist */
+	double max_val;
+	double min_Lval;        /* their log values */
+	double max_Lval;
 
-   double start_val;    /* displayed start and end val */      
-   double end_val;
-   double start_Lval;   /* their log values */        
-   double end_Lval;
+	double start_val;    /* displayed start and end val */      
+	double end_val;
+	double start_Lval;   /* their log values */        
+	double end_Lval;
 
-   int npoints;          /* number of data points per x pixel value */
-   
-   GtkWidget *label_layout; /* layout for the  x/y labels */
-   int w;                   /* drawing w width   */
-   int h;                   /* drawing h height  */
-   int wh;                  /* w x label width, y label box height, for positionning */ 
-   int changed;             /* w or h has need redisplay */ 
-   GtkWidget *label_table;  /* table for the  x/y labels */  
-   int nlabels;         /* number of required labels */
-   int lb_num;          /* first value in decade       */
-   double lb_start;     /* first value for label       */
-   double lb_Lstart;    /* first value for grid in log mode   */
-   double step;         /* step */
-   int logAble;         /* if set can be displayed in log */
-   int logAxis;         /* axis scaling: 0=linear 1=log base 10 */
-   int xdir;            /* set to 1 for X labels */
-   int lbwidth;         /* box width of a label in pixel */
-   int lbheight;        /* box height of a label in pixel = character height */
-   int char_width;      /* character width */
-   GList *label_list;   /* list of labels for this axis. */
+	int npoints;          /* number of data points per x pixel value */
+
+	GtkWidget *label_layout; /* layout for the  x/y labels */
+	int w;                   /* drawing w width   */
+	int h;                   /* drawing h height  */
+	int wh;                  /* w x label width, y label box height, for positionning */ 
+	int changed;             /* w or h has need redisplay */ 
+	GtkWidget *label_table;  /* table for the  x/y labels */  
+	int nlabels;         /* number of required labels */
+	int lb_num;          /* first value in decade       */
+	double lb_start;     /* first value for label       */
+	double lb_Lstart;    /* first value for grid in log mode   */
+	double step;         /* step */
+	int logAble;         /* if set can be displayed in log */
+	int logAxis;         /* axis scaling: 0=linear 1=log base 10 */
+	int xdir;            /* set to 1 for X labels */
+	int lbwidth;         /* box width of a label in pixel */
+	int lbheight;        /* box height of a label in pixel = character height */
+	int char_width;      /* character width */
+	GList *label_list;   /* list of labels for this axis. */
 };
 
 
@@ -119,5 +119,5 @@ double al_label_x2val(GawLabels *lbx, int x);
 
 int al_label_val2y(GawLabels *lby, double yval);
 double al_label_y2val(GawLabels *lby, int y);
-   
+
 #endif /* GAWLABEL_H */

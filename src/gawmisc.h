@@ -8,8 +8,8 @@
  */
 
 enum _ConversionMode {
-   CNV_NORMAL = 0,
-   CNV_SCIENTIFIC,
+	CNV_NORMAL = 0,
+	CNV_SCIENTIFIC,
 };
 
 

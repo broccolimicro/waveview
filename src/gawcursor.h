@@ -10,12 +10,12 @@ typedef struct _AWCursor AWCursor;
  */
 
 struct _MeasureBtn {
-   AWCursor *csp;      /* pointer to associate cursor */
-   int measurefunc;
-   WaveVar *var;           // note: might be NULL
-   
-   GtkWidget *button;
-   GtkWidget *label;
+	AWCursor *csp;      /* pointer to associate cursor */
+	int measurefunc;
+	WaveVar *var;           // note: might be NULL
+
+	GtkWidget *button;
+	GtkWidget *label;
 };
 
 
@@ -23,13 +23,13 @@ struct _MeasureBtn {
  * Cursor - structure describing a vertical bar cursor
  */
 struct _AWCursor {
-   GtkWidget *button;  /* display x measure button */
-   GtkWidget *label;   /* display x measure label  */
-   int shown;          /* vertical bar cursor */
-   int zoom;           /* set if coming from zoom */
-   int x;              /* x pixel value */
-   double xval;        /* data corresponding x val */
-   GdkRGBA *color;     /* color for cursor in drawing area */
+	GtkWidget *button;  /* display x measure button */
+	GtkWidget *label;   /* display x measure label  */
+	int shown;          /* vertical bar cursor */
+	int zoom;           /* set if coming from zoom */
+	int x;              /* x pixel value */
+	double xval;        /* data corresponding x val */
+	GdkRGBA *color;     /* color for cursor in drawing area */
 };
 
 /*

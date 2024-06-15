@@ -15,43 +15,43 @@ typedef struct _WavePanel WavePanel;
 typedef void (*WaveDraw_FP) ();
 
 struct _WavePanel {
-   AppClass parent;
-   UserData *ud;           /* pointer to application data */
-   GtkWidget *lmtopbox;    /* the box at top of lmswtable */
-   GtkWidget *drawing;     /* DrawingArea for waveforms */
-   GSimpleActionGroup *wpgroup;  /* the panel action group */
-   gboolean selected;
-   gboolean configure_seen;   /* set to 1 in configure_cb */
-   
-   GList *vwlist;  /* list of VisibleWaves shown in this panel. */
+	AppClass parent;
+	UserData *ud;           /* pointer to application data */
+	GtkWidget *lmtopbox;    /* the box at top of lmswtable */
+	GtkWidget *drawing;     /* DrawingArea for waveforms */
+	GSimpleActionGroup *wpgroup;  /* the panel action group */
+	gboolean selected;
+	gboolean configure_seen;   /* set to 1 in configure_cb */
 
-   GList *textlist;  /* list of GawText shown in this panel. */
+	GList *vwlist;  /* list of VisibleWaves shown in this panel. */
 
-   GtkWidget *top_ylabel_log;   /* label logY in lmtopbox       */
-   GtkWidget *ylabel_log;       /* label logY             */
-   GtkWidget *logy_box;         /* box for label logY ylabel_max */
-   GtkWidget *ylabel_max;       /* ymax label */
-   GtkWidget *ylabel_min;       /* ymin label */
-   
-   GtkWidget *lmscroll_win; /* scrolled window for lmtable */
-   GtkWidget *lmswtable;     /* left most scrolled window table */
-   GtkWidget *lmtable;      /* left measure global table */
-   GtkWidget *popmenu;      /*  popup menu in panel */
-   GtkWidget *textpopmenu;    /*  popup menu in panel for text edit */
-   
-   GawLabels *yLabels;  /* structure to hold data about the axis */
-   double min_xval; /* min/max data x/y values over whole vwlist */        
-   double max_xval;
-   
-   int man_yzoom;  /* toggle button state in zoom dialog */
-   int nextcolor;  /* color to use for next added waveform */
-   int showGrid;  /* show grid in panel */
-   
-   GdkRGBA *grid_color;      /* color for panel grid graticule */
-   cairo_t *cr;              /* cairo context for drawing */
-   WaveDraw_FP drawFunc;     /* function to draw the waveform */
-   /* sensitive widget */
-   GtkWidget *pPLogY;   
+	GList *textlist;  /* list of GawText shown in this panel. */
+
+	GtkWidget *top_ylabel_log;   /* label logY in lmtopbox       */
+	GtkWidget *ylabel_log;       /* label logY             */
+	GtkWidget *logy_box;         /* box for label logY ylabel_max */
+	GtkWidget *ylabel_max;       /* ymax label */
+	GtkWidget *ylabel_min;       /* ymin label */
+
+	GtkWidget *lmscroll_win; /* scrolled window for lmtable */
+	GtkWidget *lmswtable;     /* left most scrolled window table */
+	GtkWidget *lmtable;      /* left measure global table */
+	GtkWidget *popmenu;      /*  popup menu in panel */
+	GtkWidget *textpopmenu;    /*  popup menu in panel for text edit */
+
+	GawLabels *yLabels;  /* structure to hold data about the axis */
+	double min_xval; /* min/max data x/y values over whole vwlist */        
+	double max_xval;
+
+	int man_yzoom;  /* toggle button state in zoom dialog */
+	int nextcolor;  /* color to use for next added waveform */
+	int showGrid;  /* show grid in panel */
+
+	GdkRGBA *grid_color;      /* color for panel grid graticule */
+	cairo_t *cr;              /* cairo context for drawing */
+	WaveDraw_FP drawFunc;     /* function to draw the waveform */
+	/* sensitive widget */
+	GtkWidget *pPLogY;   
 };
 
 /*

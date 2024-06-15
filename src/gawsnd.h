@@ -1,6 +1,6 @@
 #ifndef GAWSND_H
 #define GAWSND_H
- 
+
 /*
  * gawsnd.h - Gtk analog waveform viewer
  * sound configuration and capture.
@@ -13,16 +13,16 @@
 typedef struct _GawSndData GawSndData;
 
 struct _GawSndData {
-   AppClass parent;
-   UserData *ud;
-   GtkWidget *w_card;       /* combo for card */
-   GtkWidget *w_rate;       /* combo for rate */
-   gint n_rate;             /* number of item in rate combo */
-   GtkWidget *w_format;     /* combo for format */
-   gint n_format;           /* number of item in format combo */
-   GtkWidget *w_duration;   /* entry for duration */
-   GtkWidget *w_size;       /* entry for siz */
-   SoundParams *sparams;    /* sound params for sound interface */
+	AppClass parent;
+	UserData *ud;
+	GtkWidget *w_card;       /* combo for card */
+	GtkWidget *w_rate;       /* combo for rate */
+	gint n_rate;             /* number of item in rate combo */
+	GtkWidget *w_format;     /* combo for format */
+	gint n_format;           /* number of item in format combo */
+	GtkWidget *w_duration;   /* entry for duration */
+	GtkWidget *w_size;       /* entry for siz */
+	SoundParams *sparams;    /* sound params for sound interface */
 };
 
 /*

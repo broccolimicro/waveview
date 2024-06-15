@@ -8,8 +8,8 @@
  */
 
 enum _DatafileTypeInfo {
-   DATAFILE_FILE = 1,
-      DATAFILE_SOUND,
+	DATAFILE_FILE = 1,
+	DATAFILE_SOUND,
 };
 
 typedef struct _DataFile DataFile;
@@ -19,24 +19,24 @@ typedef struct _DataFile DataFile;
 
 
 struct _DataFile {
-   AppClass parent;
-   void  *ud;   /* back pointer to userData */
-   WaveTable *wt;          /* pointer to table object */
-   WaveTable *old_wt;      /* for clean up purpose */
-   gchar *filename;  
-   gchar *format;          /* format of filename */
-   SoundParams *sparams;   /* sound params  */
-   int method;             /* file or sound */
-   GtkWidget *wlist_win;   /* window with scrolling variable list */
-   GtkWidget *wlist_vbox;  /* vertical container */
-   GtkWidget *wlist_box;   /* scrolled box containing DnD variable items */
-   int ftag;        /* short tag used to help identify which file is which */
-   guint merge_id;  /* merge id in variable list menu */
-   int ndv;
-   GdkPixbuf *drag_icon;
-   GSimpleActionGroup *group;  /* the vl menu action group */
-   GtkWidget *vlmenu;         /*  vl menu  */
-   GtkWidget *lbpopmenu;      /*  list button pop menu  */
+	AppClass parent;
+	void  *ud;   /* back pointer to userData */
+	WaveTable *wt;          /* pointer to table object */
+	WaveTable *old_wt;      /* for clean up purpose */
+	gchar *filename;  
+	gchar *format;          /* format of filename */
+	SoundParams *sparams;   /* sound params  */
+	int method;             /* file or sound */
+	GtkWidget *wlist_win;   /* window with scrolling variable list */
+	GtkWidget *wlist_vbox;  /* vertical container */
+	GtkWidget *wlist_box;   /* scrolled box containing DnD variable items */
+	int ftag;        /* short tag used to help identify which file is which */
+	guint merge_id;  /* merge id in variable list menu */
+	int ndv;
+	GdkPixbuf *drag_icon;
+	GSimpleActionGroup *group;  /* the vl menu action group */
+	GtkWidget *vlmenu;         /*  vl menu  */
+	GtkWidget *lbpopmenu;      /*  list button pop menu  */
 };
 
 /*

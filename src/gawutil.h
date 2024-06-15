@@ -11,5 +11,5 @@
  * prototypes
  */
 GtkWidget *gawutil_button_new_with_label( gchar *label, gchar *themed_name,
-                                     GtkIconSize size);
+		GtkIconSize size);
 #endif /* GAWUTIL_H */
