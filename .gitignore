@@ -1,0 +1,4 @@
+*.o
+gaw
+Makefile
+Makefile.in
