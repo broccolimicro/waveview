@@ -71,6 +71,7 @@ struct _SpiceStream {
    int currow;
    /* some more variables for .wav */
    int bps;       /* bit per sample */
+   int idxcol; // throw away any index column
 };
 
 

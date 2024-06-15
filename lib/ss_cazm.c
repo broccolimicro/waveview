@@ -36,11 +36,11 @@
 
 #include <spicestream.h>
 #include <wavevar.h>
- 
+
 #ifdef TRACE_MEM
 #include <tracemem.h>
 #endif
-        
+
 
 static int 
 ascii_process_header(SpiceStream *ss, char *line, VarType ivtype );
@@ -55,42 +55,42 @@ ascii_process_header(SpiceStream *ss, char *line, VarType ivtype );
  */
 int sf_rdhdr_cazm( SpiceStream *ss )
 {
-   int done = 0;
-   VarType ivtype;
-   char *line;
-   int ret;
-	
-   while( ! done) {
-      if ( (line = fdbuf_get_line(ss->linebuf)) == NULL ||
-	   fdbuf_get_lineno(ss->linebuf)  > 30) {
-	 return 0;
-      }
-      /* "section header" line */
-      if(strncmp (line, "TRANSIENT", 9) == 0) {
-	 ivtype = TIME;
-	 done = 1;
-      } else if (strncmp(line, "AC ANALYSIS", 11) == 0) {
-	 ivtype = FREQUENCY;
-	 done = 1;
-      } else if (strncmp(line, "TRANSFER", 8) == 0) {
-	 /* DC transfer function - ivar might also be current,
-	  * but we can't tell */
-	 ivtype = VOLTAGE;
-	 done = 1;
-      }
-   }
+	int done = 0;
+	VarType ivtype;
+	char *line;
+	int ret;
 
-   /*
-    * line after header contains signal names
-    * first one is assumed to be the independent variable.
-    */
-   if ( (line = fdbuf_get_line(ss->linebuf)) == NULL ) {
-      return 0;
-   }
+	while( ! done) {
+		if ( (line = fdbuf_get_line(ss->linebuf)) == NULL ||
+				fdbuf_get_lineno(ss->linebuf)  > 30) {
+			return 0;
+		}
+		/* "section header" line */
+		if(strncmp (line, "TRANSIENT", 9) == 0) {
+			ivtype = TIME;
+			done = 1;
+		} else if (strncmp(line, "AC ANALYSIS", 11) == 0) {
+			ivtype = FREQUENCY;
+			done = 1;
+		} else if (strncmp(line, "TRANSFER", 8) == 0) {
+			/* DC transfer function - ivar might also be current,
+			 * but we can't tell */
+			ivtype = VOLTAGE;
+			done = 1;
+		}
+	}
 
-   ret = ascii_process_header(ss, line, ivtype );
-   msg_dbg("%s : 'cazm' file format with %d columns", ss->filename, ss->ncols);
-   return ret;
+	/*
+	 * line after header contains signal names
+	 * first one is assumed to be the independent variable.
+	 */
+	if ( (line = fdbuf_get_line(ss->linebuf)) == NULL ) {
+		return 0;
+	}
+
+	ret = ascii_process_header(ss, line, ivtype );
+	msg_dbg("%s : 'cazm' file format with %d columns", ss->filename, ss->ncols);
+	return ret;
 }
 
 
@@ -99,39 +99,39 @@ int sf_rdhdr_cazm( SpiceStream *ss )
  */
 int sf_rdhdr_ascii( SpiceStream *ss )
 {
-   char *cp;
-   char *line;
-   int ret;
-	
-   /* 
-    * first line is expected to contain space-seperated
-    * variable names.
-    * first one is assumed to be the independent variable.
-    */
-   if ( (line = fdbuf_get_line(ss->linebuf)) == NULL) {
-      return 0;
-   }
-	
-   /*
-    * Check for non-ascii characters in header, to reject 
-    * binary files.
-    */
-   for (cp = line; *cp; cp++) {
-      if ( ! isgraph(*cp) && *cp != ' ' && *cp != '\t') {
-	 return -1;
-      }
-   }
-   /*
-    * Remove some characters at beginning of the line
-    */
-   cp = line + strspn( line, "#! " ) ; /* skip characters in arg 2 */
-   if ( cp > line ) {
-      dbuf_strcpy( (DBuf *) ss->linebuf, cp);
-   }
+	char *cp;
+	char *line;
+	int ret;
 
-   ret = ascii_process_header(ss, ((DBuf *) ss->linebuf)->s, UNKNOWN );
-   msg_dbg("%s : 'ascii' file format with %d columns", ss->filename, ss->ncols);
-   return ret;
+	/* 
+	 * first line is expected to contain space-seperated
+	 * variable names.
+	 * first one is assumed to be the independent variable.
+	 */
+	if ( (line = fdbuf_get_line(ss->linebuf)) == NULL) {
+		return 0;
+	}
+
+	/*
+	 * Check for non-ascii characters in header, to reject 
+	 * binary files.
+	 */
+	for (cp = line; *cp; cp++) {
+		if ( ! isgraph(*cp) && *cp != ' ' && *cp != '\t') {
+			return -1;
+		}
+	}
+	/*
+	 * Remove some characters at beginning of the line
+	 */
+	cp = line + strspn( line, "#! " ) ; /* skip characters in arg 2 */
+	if ( cp > line ) {
+		dbuf_strcpy( (DBuf *) ss->linebuf, cp);
+	}
+
+	ret = ascii_process_header(ss, ((DBuf *) ss->linebuf)->s, UNKNOWN );
+	msg_dbg("%s : 'ascii' file format with %d columns", ss->filename, ss->ncols);
+	return ret;
 }
 
 
@@ -139,40 +139,50 @@ int sf_rdhdr_ascii( SpiceStream *ss )
  * Process a header line from an ascii or cazm format file.
  * Returns a filled-in SpiceStream* with variable information.
  */
-static int 
+	static int 
 ascii_process_header(SpiceStream *ss, char *line, VarType ivtype )
 {
-   char *signam;
+	char *signam;
 
-   signam = strtok(line, " \t\n");
-   if ( ! signam) {
-      msg_error(_("line %d: syntax error in header"), fdbuf_get_lineno(ss->linebuf));
-      return -1;
-   }
+	signam = strtok(line, " \t\n");
+	if ( ! signam) {
+		msg_error(_("line %d: syntax error in header"), fdbuf_get_lineno(ss->linebuf));
+		return -1;
+	}
 
-   if ( ivtype == UNKNOWN) {
-      if (app_strcasestr(signam, "time") ) {
-	 ivtype = TIME;
-      }
-   }
-   spicestream_var_add( ss, signam, ivtype, 1 );
+	if (app_strcasestr(signam, "index") ) {
+		ss->idxcol = 0;
+		// Skip to next token in header
+		signam = strtok(NULL, " \t\n");
+		if ( ! signam) {
+			msg_error(_("line %d: syntax error in header"), fdbuf_get_lineno(ss->linebuf));
+			return -1;
+		}
+	}
 
-   ss->ntables = 1;
-   ss->ncols = 1;
-   while ((signam = strtok(NULL, " \t\n")) != NULL) {
-      spicestream_var_add( ss, signam, UNKNOWN, 1 );
-      ss->ncols++;
-   }
+	if ( ivtype == UNKNOWN) {
+		if (app_strcasestr(signam, "time") ) {
+			ivtype = TIME;
+		}
+	}
+	spicestream_var_add( ss, signam, ivtype, 1 );
 
-   /* give a name to the set from filename */
-   if ( (signam = strrchr( ss->filename, '/')) ) {
-      signam++;
-   } else {
-      signam = ss->filename;
-   }
-   dataset_dup_setname(ss->wds, signam );
-   ss->flags = SSF_PUSHBACK | SSF_NORDHDR | SSF_CPVARS;
-   return 1;
+	ss->ntables = 1;
+	ss->ncols = 1;
+	while ((signam = strtok(NULL, " \t\n")) != NULL) {
+		spicestream_var_add( ss, signam, UNKNOWN, 1 );
+		ss->ncols++;
+	}
+
+	/* give a name to the set from filename */
+	if ( (signam = strrchr( ss->filename, '/')) ) {
+		signam++;
+	} else {
+		signam = ss->filename;
+	}
+	dataset_dup_setname(ss->wds, signam );
+	ss->flags = SSF_PUSHBACK | SSF_NORDHDR | SSF_CPVARS;
+	return 1;
 }
 
 
@@ -189,89 +199,97 @@ ascii_process_header(SpiceStream *ss, char *line, VarType ivtype )
 
 int sf_readrow_ascii(SpiceStream *ss)
 {
-   int i;
-   char *tok;
-   char *line;
-   
-   if ( (line = fdbuf_get_line(ss->linebuf)) == NULL) {
-      return 0; /* EOF */
-   }
+	int i;
+	char *tok;
+	char *line;
 
-   tok = strtok(line, " \t\n");
-   if ( ! tok) {
-      return -2;  /* blank line can indicate end of data */
-   }
+	if ( (line = fdbuf_get_line(ss->linebuf)) == NULL) {
+		return 0; /* EOF */
+	}
 
-   /*
-    * check to see if it is numeric: ascii format is so loosly defined
-    * that we might read a load of garbage otherwise.
-    */
-   if (strspn(tok, "0123456789eE+-.") != strlen(tok)) {
-      msg_error(_("%s:\nline %d: expected number; maybe this isn't an ascii data file at all?"),
-		 ss->filename, ss->linebuf->lineno );
-      return -1;
-   }
+	tok = strtok(line, " \t\n");
+	if ( ! tok) {
+		return -2;  /* blank line can indicate end of data */
+	}
 
-   double val = g_ascii_strtod(tok, NULL);
-   spicestream_val_add( ss, val);
+	// skip index column
+	if (ss->idxcol >= 0) {
+		tok = strtok(NULL, " \t\n");
+		if ( ! tok) {
+			return -2;  /* blank line can indicate end of data */
+		}
+	}
 
-   for (i = 0; i < ss->ncols - 1; i++) {
-      tok = strtok(NULL, " \t\n");
-      if ( ! tok) {
-	 msg_error(_("%s:%d: data field %d missing"),
-		    ss->linebuf->filename, ss->linebuf->lineno );
-	 return -1;
-      }
-      val = g_ascii_strtod(tok, NULL);
-      spicestream_val_add( ss, val);
-   }
-   return 1;
+	/*
+	 * check to see if it is numeric: ascii format is so loosly defined
+	 * that we might read a load of garbage otherwise.
+	 */
+	if (strspn(tok, "0123456789eE+-.") != strlen(tok)) {
+		msg_error(_("%s:\nline %d: expected number; maybe this isn't an ascii data file at all?"),
+				ss->filename, ss->linebuf->lineno );
+		return -1;
+	}
+
+	double val = g_ascii_strtod(tok, NULL);
+	spicestream_val_add( ss, val);
+
+	for (i = 0; i < ss->ncols - 1; i++) {
+		tok = strtok(NULL, " \t\n");
+		if ( ! tok) {
+			msg_error(_("%s:%d: data field %d missing"),
+					ss->linebuf->filename, ss->linebuf->lineno );
+			return -1;
+		}
+		val = g_ascii_strtod(tok, NULL);
+		spicestream_val_add( ss, val);
+	}
+	return 1;
 }
 
 void sf_write_file_ascii( FILE *fd, WaveTable *wt, char *fmt)
 {
-   int i;
-   int j;
-   int k = 0;
-   char *c = "";
-   char format[64];
-   WDataSet *wds = wavetable_get_dataset( wt, k);
-   WaveVar *var = g_ptr_array_index( wds->vars, 0);
-//   double min = wavevar_val_get_min(var);
-//   double max = wavevar_val_get_max(var);
-   
-//   fprintf( stdout, "min %f, max %f\n", min, max);
-   
-   for ( i = 0 ; i < wds->ncols ; i++ ){
-      var = g_ptr_array_index( wds->vars, i);
-      fprintf( fd, "%s%s", c, var->varName);
-      c = " ";
-   }
-   fprintf( fd, "\n");
-      
-   if ( ! fmt ) {
-      fmt = "%.10g";
-   }
-   sprintf( format, "%%s%s", fmt );
-   
-   while ( (wds = wavetable_get_dataset( wt, k )) ){
-      if ( k > 0 ) {
-	 fprintf( fd, "\n");
-      }
-   
-      for ( i = 0 ; i < wds->nrows ; i++ ){
-	 c = "";
-	 for ( j = 0 ; j < wds->ncols ; j++ ){
-	    double val = dataset_val_get( wds, i, j );
-	    if ( j == 0 ){
-	       fprintf( fd, fmt, val);
-	    } else {
-	       fprintf( fd, format, c, val);
-	    }
-	    c = " ";
-	 }
-	 fprintf( fd, "\n");
-      }
-      k++;
-   }
+	int i;
+	int j;
+	int k = 0;
+	char *c = "";
+	char format[64];
+	WDataSet *wds = wavetable_get_dataset( wt, k);
+	WaveVar *var = g_ptr_array_index( wds->vars, 0);
+	//   double min = wavevar_val_get_min(var);
+	//   double max = wavevar_val_get_max(var);
+
+	//   fprintf( stdout, "min %f, max %f\n", min, max);
+
+	for ( i = 0 ; i < wds->ncols ; i++ ){
+		var = g_ptr_array_index( wds->vars, i);
+		fprintf( fd, "%s%s", c, var->varName);
+		c = " ";
+	}
+	fprintf( fd, "\n");
+
+	if ( ! fmt ) {
+		fmt = "%.10g";
+	}
+	sprintf( format, "%%s%s", fmt );
+
+	while ( (wds = wavetable_get_dataset( wt, k )) ){
+		if ( k > 0 ) {
+			fprintf( fd, "\n");
+		}
+
+		for ( i = 0 ; i < wds->nrows ; i++ ){
+			c = "";
+			for ( j = 0 ; j < wds->ncols ; j++ ){
+				double val = dataset_val_get( wds, i, j );
+				if ( j == 0 ){
+					fprintf( fd, fmt, val);
+				} else {
+					fprintf( fd, format, c, val);
+				}
+				c = " ";
+			}
+			fprintf( fd, "\n");
+		}
+		k++;
+	}
 }

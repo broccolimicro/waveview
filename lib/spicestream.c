@@ -39,6 +39,7 @@ void spicestream_construct( SpiceStream *ss, char *filename, char *format, WaveT
 			spicestream_read_rows, spicestream_destroy );
    ss->filename = filename;
    ss->format = format;
+   ss->idxcol = -1;
    
     /* open file */
    ss->linebuf = fdbuf_new ( filename, "r", 0);
