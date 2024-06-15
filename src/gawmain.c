@@ -606,7 +606,10 @@ void aw_create_main_window ( UserData *ud )
    
    /* create 2 panels */
    for (i = 0 ; i < ud->reqpanels ; i++) {
-      ap_panel_add_line(ud, NULL, 0);
+      WavePanel *n = ap_panel_add_line(ud, NULL, 0);
+			if (i == 0) {
+				pa_panel_set_selected( n, n->ud );
+			}
    }
 
 

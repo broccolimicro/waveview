@@ -345,7 +345,8 @@ static void aw_pop_add_panel_above_gaction (GSimpleAction *action, GVariant *par
 {
    WavePanel *wp = (WavePanel *) user_data;
    if ( wp ) {
-      ap_panel_add_line( wp->ud, wp, 0);
+      WavePanel *n = ap_panel_add_line( wp->ud, wp, 0);
+			pa_panel_set_selected( n, n->ud );
    }
 }
 
@@ -354,7 +355,8 @@ static void aw_pop_add_panel_below_gaction (GSimpleAction *action, GVariant *par
 {
    WavePanel *wp = (WavePanel *) user_data;
    if ( wp ) {
-      ap_panel_add_line( wp->ud, wp, 1);
+      WavePanel *n = ap_panel_add_line( wp->ud, wp, 1);
+			pa_panel_set_selected( n, n->ud );
    }
 }
 
@@ -362,7 +364,8 @@ static void
 aw_add_panel_gaction (GSimpleAction *action, GVariant *param, gpointer user_data)
 {
    UserData *ud = (UserData *) user_data;
-   ap_panel_add_line(ud, NULL, 0);
+   WavePanel *n = ap_panel_add_line(ud, NULL, 0);
+   pa_panel_set_selected( n, n->ud );
 }
 
 static void

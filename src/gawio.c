@@ -326,7 +326,7 @@ static int aio_panel_add( GawIoData *gawio, char *pline )
    UserData *ud = gawio->ud;
    int i ;
 
-   msg_dbg("Fonction called %s", pline );
+   msg_dbg("Function called %s", pline );
    char *tok = stu_token_next( &pline, " ", " " );
    if ( ! tok ) {
       gawio->msg = app_strdup(_("Expecting number") );
