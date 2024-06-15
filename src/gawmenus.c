@@ -73,19 +73,6 @@ void aw_default_file_name_gaction (GSimpleAction *action, GVariant *param, gpoin
 }
 
 static void
-toggle_allow_resize_gaction (GSimpleAction *action, GVariant *param, gpointer user_data )
-{
-   UserData *ud = (UserData *) user_data;
-   GVariant *state = g_action_get_state (G_ACTION (action));
-   ud->up->allowResize =  ! g_variant_get_boolean ( state);
-   g_action_change_state (G_ACTION (action),
-                g_variant_new_boolean (ud->up->allowResize));
-   g_variant_unref (state);
-
-//   msg_dbg ("Action allowResize %d", ud->up->allowResize );
-}
-
-static void
 toggle_bar_style_gaction (GSimpleAction *action, GVariant *param, gpointer user_data )
 {
    UserData *ud = (UserData *) user_data;
@@ -877,12 +864,6 @@ static const gchar gaw_menubar[] =
 "        </item>"
 "      </section>"
 "      <section>"
-"        <item>"
-"          <attribute name='label' translatable='yes'>Allow Resize</attribute>"
-"          <attribute name='action'>gaw.AllowResize</attribute>"
-"        </item>"
-"      </section>"
-"      <section>"
 "        <submenu id='algomenu'>"
 "          <attribute name='label' translatable='yes'>Algorithm List</attribute>"
 "        </submenu>"
@@ -973,7 +954,6 @@ static TooltipInfo menubarTip[] = {
    { "ShowGrid", N_("Show Grid"), N_("Show Grid in panels"), NULL  },
    { "Scientific", N_("Scientific conversion"), N_("Use Scientific conversion mode"), NULL  },
    { "PanelColor", N_("Change panel Colors..."), N_("Change colors used in panel drawing area"), NULL  },
-   { "AllowResize", N_("Allow Resize"), N_("Allow Resize the main window"), NULL  },
 
    { "TextAction", N_("Open Text tool..."), N_("Open text tool settings"), NULL  },
    { "AlgoMenuAction", N_("Algorithm List") , N_("Select an Algorithm from the List"), NULL  },
@@ -1037,7 +1017,6 @@ static GActionEntry entries[] = {
 
 static GActionEntry toggle_entries[] = {
    { "BarStyle", toggle_bar_style_gaction, NULL, "true", NULL  },
-   { "AllowResize", toggle_allow_resize_gaction, NULL, "true", NULL  },
    { "showXlabels", aw_showXlabel_gaction, NULL, "true", NULL  },
    { "moreYlabels", aw_showMoreYlabel_gaction, NULL, "true", NULL  },
    { "showYlabels", aw_showYlabel_gaction, NULL, "true", NULL  },

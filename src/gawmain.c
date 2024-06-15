@@ -224,7 +224,6 @@ aw_update_from_prefs ( UserData *ud )
    gm_update_toggle_state(ud->group, "Ydiff", ud->up->showYDiff);
    gm_update_toggle_state(ud->group, "ShowGrid", ud->up->showGrid);
    gm_update_toggle_state(ud->group, "Scientific", ud->up->scientific);
-   gm_update_toggle_state(ud->group, "AllowResize", ud->up->allowResize);
    gm_update_toggle_state(ud->group, "BarStyle", ud->up->toolBarStyle);
    gtk_toolbar_set_style(GTK_TOOLBAR(ud->toolBar), (GtkToolbarStyle) ud->up->toolBarStyle );
 }
@@ -410,7 +409,7 @@ void aw_window_size(UserData *ud )
 //   if ( ud->winWidth ) {
 //      width = ud->winWidth ;
 //   }
-   if ( ud->up->allowResize == 0 || ud->winWidth == 0 ) {
+   if ( ud->winWidth == 0 ) {
       gtk_window_resize (GTK_WINDOW (ud->window), ud->reqWinWidth, ud->reqWinHeight);
    }
    msg_dbg( "w %d, h %d panelH %d", ud->reqWinWidth, ud->reqWinHeight, ud->panelScrolledHeight );

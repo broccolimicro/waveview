@@ -78,7 +78,6 @@ struct _UserPrefs {
    int  panelWidth;  /* nominal width for panel */
    int  minPanelHeight;  /* minimun height for panel */
    int  minPanelWidth;  /* minimum width for panel */
-   int  allowResize;    /* allow resize the main window */
    int  drawAlgo;       /* index of the drawing algorithm */
    int  toolBarStyle;  /* icons, text or both */
    char *panelBgColor;  /* RGB color for panel background 0-0xff, 0-0xff, 0-0xff */
@@ -195,11 +194,6 @@ void *up_addr_up_minPanelHeight( UserPrefs *up )
 void *up_addr_up_minPanelWidth( UserPrefs *up )
 {
    return &up->minPanelWidth;
-}
-
-void *up_addr_up_allowResize( UserPrefs *up )
-{
-   return &up->allowResize;
 }
 
 void *up_addr_up_drawAlgo( UserPrefs *up )
@@ -518,8 +512,6 @@ ConfigDescTable confDesc[] = {  /* UserPrefs - by mkcf */
      "user default font for drawing text"       },
 { "up_angle", up_addr_up_angle, TPTR,
      "degree: default angle for drawing text"       },
-{ "up_allowResize", up_addr_up_allowResize, TDECI,
-     "allow resize the main window"       },
 { "up_drawAlgo", up_addr_up_drawAlgo, TDECI,
      "index of the drawing algorithm"       },
 { "up_lboxbgColor", up_addr_up_lboxbgColor, TPTR,
