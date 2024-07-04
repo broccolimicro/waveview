@@ -55,6 +55,7 @@ char *wavetable_get_tblname ( WaveTable *wt );
 int wavetable_fill_tables( WaveTable *wt, char *filename);
 int wavetable_get_ntables ( WaveTable *wt );
 void wavetable_foreach_wavevar(WaveTable *wt, GFunc func, gpointer *p);
+void wavetable_foreach_wavevar_sorted(WaveTable *wt, GFunc func, gpointer *p);
 WaveVar *wavetable_get_var_for_name(WaveTable *wt,  char *varName, int tblno );
 void wavetable_swvar_add(WaveTable *wt, char *varName, int type, int ncols);
 int wavetable_is_multisweep( WaveTable *wt);

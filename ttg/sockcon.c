@@ -16,7 +16,14 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#ifdef __linux__
 #include <linux/tcp.h>
+#endif
+#ifdef __APPLE__
+#include <netinet/tcp.h>
+#endif
+
+
 
 #include <strmem.h>
 #include <duprintf.h>

@@ -13,7 +13,7 @@
 #include <math.h>
 
 #include <gtk/gtk.h>
-#include <gdk/gdkx.h>
+// #include <gdk/gdkx.h>
 #include <X11/extensions/shape.h>
 
 #include <gaw.h>
