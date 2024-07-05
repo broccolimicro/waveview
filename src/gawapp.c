@@ -44,7 +44,7 @@ WavePanel *ap_panel_add_line(UserData *ud, WavePanel *owp, int relpos)
 	/*  update a container to store the WavePanels */
 	ap_panel_update_table(ud);
 
-	aw_panel_scrolled_set_size_request(ud);
+	//aw_panel_scrolled_set_size_request(ud);
 	return (WavePanel *) g_list_nth_data (ud->panelList, pos);
 }
 
@@ -74,7 +74,7 @@ void ap_panel_remove_line( UserData *ud, WavePanel *wp)
 	ap_panel_update_table(ud);
 
 	/* resize the window to minimum needed */
-	aw_panel_scrolled_set_size_request(ud);
+	//aw_panel_scrolled_set_size_request(ud);
 	ap_all_redraw(ud);
 }
 

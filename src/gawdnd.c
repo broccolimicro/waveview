@@ -101,11 +101,13 @@ ad_dnd_target_event (GtkWidget *widget, GdkDragContext *context,
 					wp = ap_panel_add_line( ud, NULL, 0);
 					msg_dbg(" adding visible wave to a newpanel");
 					ap_panel_add_var(wp, dd->var, vw, NULL);
+					pa_panel_set_selected( wp, wp->ud );
 					break;
 				case DND_PANEL :
 					/* dest is drawing area */
 					msg_dbg(" adding visible wave to panel");
 					ap_panel_add_var( destdata->wp, dd->var, vw, NULL );
+					pa_panel_set_selected( destdata->wp, destdata->wp->ud );
 					break;
 				case DND_DELETE_BUT :
 					/* dest is toolbar delete wave button */
